@@ -3,6 +3,7 @@ import { Camera, CameraResultType, CameraSource, Photo} from '@capacitor/camera'
 import { Filesystem, Directory } from '@capacitor/filesystem';
 import { Preferences } from '@capacitor/preferences';
 import * as S3 from 'aws-sdk/clients/s3';
+import {environment} from '../../environments/environment.prod'
 @Injectable({
   providedIn: 'root'
 })
@@ -38,8 +39,8 @@ private async savePicture(photo: Photo) {
     };
 
     const bucket = new S3({
-      accessKeyId: process.env["KEY_ID"],
-      secretAccessKey: process.env["AWS_KEY"],
+      accessKeyId: environment.KEY_ID,
+      secretAccessKey: environment.AWS_KEY,
       region: 'us-east-1',
       signatureVersion: 'v4',
     });
