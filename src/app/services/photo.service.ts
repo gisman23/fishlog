@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Camera, CameraResultType, CameraSource, Photo} from '@capacitor/camera';
 import { Filesystem, Directory } from '@capacitor/filesystem';
-import { Preferences } from '@capacitor/preferences';
 import * as S3 from 'aws-sdk/clients/s3';
 import {environment} from '../../environments/environment.prod'
 @Injectable({
