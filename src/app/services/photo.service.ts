@@ -38,8 +38,8 @@ private async savePicture(photo: Photo) {
     };
 
     const bucket = new S3({
-      accessKeyId: 'AKIAQMZJAHTIAT27CHWF',
-      secretAccessKey: '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',
+      accessKeyId: process.env["KEY_ID"],
+      secretAccessKey: process.env["AWS_KEY"],
       region: 'us-east-1',
       signatureVersion: 'v4',
     });
