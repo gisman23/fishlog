@@ -1,0 +1,22 @@
+
+<ion-list>
+  <ion-item>
+    <ion-select placeholder="Select Body of Water">
+      <div slot="label">Body of Water <ion-text color="danger">(Required):</ion-text></div>
+      <ion-select-option value="Magothy">Magothy</ion-select-option>
+      <ion-select-option value="Potomac River">Potomac River</ion-select-option>
+      <ion-select-option value="Choptank">Choptank</ion-select-option>
+    </ion-select>
+  </ion-item>
+</ion-list>
+<ion-list>
+  <ion-item>
+    <ion-select placeholder="Select Fishermen" [multiple]="true">
+      <div slot="label">Fishermen:</div>
+      <ion-select-option value="Magothy">Steve</ion-select-option>
+      <ion-select-option value="Potomac River">Ian</ion-select-option>
+      <ion-select-option value="Choptank">Keith</ion-select-option>
+    </ion-select>
+  </ion-item>
+</ion-list>
+<ion-button (click) = "dismissModal()"> Dismiss</ion-button>
