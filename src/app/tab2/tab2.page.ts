@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonFab } from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 
 import { WebcamModule } from 'ngx-webcam';
@@ -14,7 +14,7 @@ import { decode } from "base64-arraybuffer";
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss'],
   standalone: true,
-  imports: [ CommonModule, WebcamModule, IonHeader, IonToolbar, IonTitle, IonContent, ExploreContainerComponent]
+  imports: [IonFab,  CommonModule, WebcamModule, IonHeader, IonToolbar, IonTitle, IonContent, ExploreContainerComponent]
 })
 export class Tab2Page {
 
@@ -48,11 +48,10 @@ export class Tab2Page {
   checkPermissions() {
     navigator.mediaDevices.getUserMedia({
       video: {
-        width: 500,
-        height: 500
+    //    width: 500,
+    //    height: 500
       }
     }).then((res) => {
-      console.log("response", res);
       this.stream = res;
       this.status = 'My camera is accessing';
       this.btnLabel = 'Capture image';
