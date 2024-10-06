@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 //import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { IonHeader, IonButton, IonIcon, IonImg, IonToolbar, IonTitle, IonContent, IonFab, IonFabButton } from '@ionic/angular/standalone';
 import { PhotoService } from '../services/photo.service';
-
+import { AlertController } from '@ionic/angular';
 import { WebcamModule } from 'ngx-webcam';
 import { WebcamImage } from 'ngx-webcam';
 import { Observable, Subject } from 'rxjs';
@@ -15,7 +15,8 @@ import { decode } from "base64-arraybuffer";
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
   standalone: true,
-  imports: [IonFabButton, IonFab, CommonModule, WebcamModule,IonHeader, IonButton, IonIcon, IonImg,  IonToolbar, IonTitle, IonContent],
+  imports: [IonFabButton, IonFab, CommonModule, WebcamModule,IonHeader, 
+    IonButton, IonIcon, IonImg,  IonToolbar, IonTitle, IonContent]
 })
 export class Tab1Page {
 
@@ -24,34 +25,25 @@ export class Tab1Page {
   trigger: Subject<void> = new Subject();
   previewImage: string = '';
   btnLabel: string = 'Capture image';
-  constructor (){
-    this.checkPermissions();
-  }
+  constructor(private alertController: AlertController) {}
 
   get $trigger(): Observable<void> {
     return this.trigger.asObservable();
   }
 
   snapshot(event: WebcamImage) {
-    console.log("EVENT-", event.imageAsBase64);
+
     this.previewImage = event.imageAsDataUrl;
-    this.btnLabel = 'Re capture image';
-
-
-
     const buffer = decode(event.imageAsBase64);
-
     const tags =  ExifReader.load(buffer);
+    this.presentAlert(tags)
     console.log("tags- ", tags)
 
   }
 
   checkPermissions() {
     navigator.mediaDevices.getUserMedia({
-      video: {
-    //    width: 500,
-    //    height: 500
-      }
+      video: {}
     }).then((res) => {
       this.stream = res;
       this.status = 'My camera is accessing';
@@ -67,10 +59,23 @@ export class Tab1Page {
   }
 
   captureImage() {
+    this.proceed()
     this.trigger.next();
   }
 
   proceed() {
     console.log(this.previewImage);
+
+  }
+
+  async presentAlert(tags) {
+    const alert = await this.alertController.create({
+      header: 'A Short Title Is Best',
+      subHeader: 'A Sub Header Is Optional',
+      message:tags,
+      buttons: ['Action'],
+    });
+
+    await alert.present();
   }
 }
