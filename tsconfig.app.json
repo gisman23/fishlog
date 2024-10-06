@@ -3,7 +3,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
-    "types": ["node"]
+    "types": ["node", "w3c-image-capture"]
   },
   "files": [
     "src/main.ts",
