@@ -25,6 +25,8 @@ export class Tab1Page {
   trigger: Subject<void> = new Subject();
   previewImage: string = '';
   btnLabel: string = 'Capture image';
+  tags: any;
+
   constructor(private alertController: AlertController) {}
 
   get $trigger(): Observable<void> {
@@ -35,9 +37,9 @@ export class Tab1Page {
 
     this.previewImage = event.imageAsDataUrl;
     const buffer = decode(event.imageAsBase64);
-    const tags =  ExifReader.load(buffer);
-    this.presentAlert(tags)
-    console.log("tags- ", tags)
+    this.tags =  ExifReader.load(buffer);
+    this.presentAlert(this.tags)
+    console.log("mytags- ", this.tags)
 
   }
 
@@ -59,23 +61,27 @@ export class Tab1Page {
   }
 
   captureImage() {
-    this.proceed()
+ //   this.proceed()
     this.trigger.next();
   }
 
+  /*
   proceed() {
     console.log(this.previewImage);
 
   }
-
-  async presentAlert(tags) {
+*/
+  async presentAlert(mytags) {
+    console.log("Here", mytags)
     const alert = await this.alertController.create({
-      header: 'A Short Title Is Best',
-      subHeader: 'A Sub Header Is Optional',
-      message:tags,
-      buttons: ['Action'],
+      header: 'Exif Data',
+      message: JSON.stringify(mytags),
+      backdropDismiss: true,
     });
 
-    await alert.present();
+    await alert.present().then(()=>console.log("this works")).catch((err)=>console.error(err));
+
+    let result = await alert.onDidDismiss();
+    console.log(result);
   }
 }

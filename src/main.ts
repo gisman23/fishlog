@@ -1,4 +1,4 @@
-import { enableProdMode} from '@angular/core';
+import { enableProdMode, importProvidersFrom, ModuleWithProviders} from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { RouteReuseStrategy, provideRouter, withPreloading, PreloadAllModules, withComponentInputBinding  } from '@angular/router';
 import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular/standalone';
@@ -10,7 +10,7 @@ import { isDevMode } from '@angular/core';
 
 import { environment } from './environments/environment';
 import { provideServiceWorker } from '@angular/service-worker';
-
+import { IonicModule } from '@ionic/angular';
 // Add the import
 import { defineCustomElements } from '@ionic/pwa-elements/loader';
 
@@ -25,10 +25,14 @@ defineCustomElements(window);
 bootstrapApplication(AppComponent, {
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    importProvidersFrom(IonicModule.forRoot({innerHTMLTemplatesEnabled: true})),
     provideIonicAngular(),
     provideRouter(routes, withComponentInputBinding(), withPreloading(PreloadAllModules)), provideServiceWorker('ngsw-worker.js', {
       enabled: !isDevMode(),
       registrationStrategy: 'registerWhenStable:30000'
     }),
+
 ],
 });
+
+
