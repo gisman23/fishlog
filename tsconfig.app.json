@@ -3,7 +3,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
-    "types": ["node", "w3c-image-capture"]
+    "types": ["node", "w3c-image-capture", "googlemaps"]
   },
   "files": [
     "src/main.ts",

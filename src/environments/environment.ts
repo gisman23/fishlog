@@ -3,14 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: true,
+  APP_ID: 'fishapp-yushp',
+  GRAPHQL_URI: 'https://us-east-1.aws.realm.mongodb.com/api/client/v2.0/app/fishapp-yushp/graphql',
+  API_KEY: 'AJuEFKdWNt7IhKLFADy2OETBP6fhqlYIRiL5HKWDqDYEwNCXerSEARRbRcueahJE',
+  mapsKey: 'AIzaSyCpfhvux93q1Fi5OYT6FYuIRfjfOuXKQY4',
+  AWS_KEY: 'oEGm468vHNljl/pAd5HYpntBI8vm7nFBGWjtpQuC',
+  KEY_ID: 'AKIAQMZJAHTIAT27CHWF'
 };
-
-/*
- * For easier debugging in development mode, you can import the following file
- * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
- *
- * This import should be commented out in production mode because it will have a negative impact
- * on performance if an error is thrown.
- */
-// import 'zone.js/plugins/zone-error';  // Included with Angular CLI.
