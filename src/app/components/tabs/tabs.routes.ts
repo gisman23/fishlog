@@ -9,7 +9,7 @@ export const routes: Routes = [
       {
         path: 'camera',
         loadComponent: () =>
-          import('../components/camera-tab/camera-tab').then((m) => m.CameraTab),
+          import('../../components/camera-tab/camera-tab').then((m) => m.CameraTab),
       },
       {
         path: 'tab2',
@@ -19,7 +19,7 @@ export const routes: Routes = [
       {
         path: 'map',
         loadComponent: () =>
-          import('../components/map-tab/map-tab').then((m) => m.MapTab),
+          import('../../components/map-tab/map-tab').then((m) => m.MapTab),
       },
       {
         path: '',
