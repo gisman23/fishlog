@@ -18,10 +18,11 @@ export class DataSignalService {
   endDate = signal(null)
 
    constructor( 
-     private fishEventsService: FishingEventsGQL
+     private fishEventsService: FishingEventsGQL,
+     private fishEventFilterService: FishingEventsByFilterGQL
    ) 
   {
-   /* effect(() => {
+    effect(() => {
         this.fishEventFilterService
           .watch({
             fisherman: this.selectedFishermen(),
@@ -33,7 +34,7 @@ export class DataSignalService {
           .valueChanges.subscribe(({ data, loading }) => {
             this.catches.set(data.Catches);
           });
-      } )  */
+      } )  
      effect(() => {
         this.fishEventsService
           .watch().valueChanges.subscribe(({ data, loading }) => {

@@ -3,7 +3,7 @@ import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/stan
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { DataSignalService } from '../../services/data.service';
 import { GoogleMapsModule } from "@angular/google-maps";
-//import { MarkerClusterer } from "@googlemaps/markerclusterer";
+import { MarkerClusterer} from "@googlemaps/markerclusterer";
 
 @Component({
   selector: 'app-map-tab',
@@ -17,14 +17,14 @@ import { GoogleMapsModule } from "@angular/google-maps";
 export class MapTab
 { 
   dateStr = ''
-  map: google.maps.Map;
+  map:any
   marker:  google.maps.marker.AdvancedMarkerElement;
   markers: google.maps.marker.AdvancedMarkerElement[] = [];
 
   constructor(private dataService: DataSignalService) {
- /*  effect(() => {
+   effect(() => {
       this.DisplayCatches(dataService.selectedCatches());
-    }); */
+    }); 
     effect(() => {
       this.DisplayCatches(dataService.catches());
     }); 
@@ -35,29 +35,31 @@ export class MapTab
   }
   
   async createMap()  {
-    const { Map, InfoWindow } = await google.maps.importLibrary("maps") as google.maps.MapsLibrary;
-    const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary("marker") as google.maps.MarkerLibrary;
+    const { Map} = await google.maps.importLibrary("maps") as google.maps.MapsLibrary;
 
     this.map = new Map(document.getElementById("map"), {
       center: { lat: 39.066, lng: -76.511 },
       zoom: 12,
       mapId: "DEMO_MAP_ID",
     });
-
- 
-     // Handle marker click
-   //  await this.map.setOnMarkerClickListener((event) => {...});
    } 
 
-  public DisplayCatches(catches) {
-    console.log("catches - ",catches)
+  public async DisplayCatches(catches) {
+    const { InfoWindow } = await google.maps.importLibrary("maps") as google.maps.MapsLibrary;
+    const { AdvancedMarkerElement } = await google.maps.importLibrary("marker") as google.maps.MarkerLibrary;
+ 
+
     this.markers = []
+    const infowindow = new InfoWindow({
+      content: "Testing",
+    });
 
  //   this.featureGroup.clearLayers();
     catches.forEach((x) => {
       this.dateStr = String(x.CatchDate).substring(5,7) + '/' + String(x.CatchDate).substring(8,10) + '/' + String(x.CatchDate).substring(0,4)
       console.log(x.Loc[1], x.Loc[0])
-      var popupContent =
+      const popupContent = document.createElement("div");
+       popupContent.innerHTML =
         '<div>' +
         '<b>' + String(this.dateStr) + '</b> - ' + String(x.CatchTime) + 
         '<br/> ' +
@@ -70,28 +72,43 @@ export class MapTab
         '<b> Air Temp:  </b>' +
         String(x.AirTemp) +
         '<br/>' +
-      '<b> Water Temp:  </b>' + String(x.WaterTemp) + '<br/>';
-      if (x.LowTideOffset > 0) {
+      '<b> Water Temp:  </b>' + String(x.WaterTemp) + '<br/></div>';
+   /*   if (x.LowTideOffset > 0) {
         popupContent +=
           '<b> Low Tide Offset:  </b>' + String(x.LowTideOffset) + ' mins<br/>';
       }
       if (x.HighTideOffset > 0) {
         popupContent +=
-          '<b> High Tide Offset:  </b>' + String(x.HighTideOffset) + ' mins<br/>';
+          '<b> High Tide Offset:  </b>' + String(x.HighTideOffset) + ' mins<br/></div>';
       }
-      popupContent +=
-        '<br>' + '<img src=' + x.Picture + ' width="128" height="128"></div>';
+    //  popupContent +=
+     //   '<br>' + '<img src=' + x.Picture + ' width="128" height="128"></div>';
+*/
 
       const map = this.map
       const position = new google.maps.LatLng(x.Loc[1], x.Loc[0])
-      this.marker = new google.maps.marker.AdvancedMarkerElement({
+      const marker = new AdvancedMarkerElement({
           map,
           position, 
        });
+
+       marker.addListener("click", () => {
+        infowindow.setContent("Hello")
+        infowindow.open(
+          {map,
+          anchor: marker,
+          }
+        );
+      });
+      this.markers.push(marker)
 
   //  this.map.addLayer(this.markers);
  //   if (this.featureGroup.getBounds().isValid()) {
  //     this.map.fitBounds(this.featureGroup.getBounds(), { padding: [50, 50] }); */
     } )
+    const map = this.map
+    var mkl = this.markers
+    new MarkerClusterer({map, markers:mkl})
+  
   }
 }
