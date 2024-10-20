@@ -1,0 +1,58 @@
+query FishingEvents {
+  Catches {
+    BodyOfWater
+    CatchDate
+    CatchTime
+    _id
+    Fisherman
+    Loc
+    Species
+  }
+}
+
+query FishingEventsByFilter($fisherman: string, $species: string, $water: string, $startDate: string, $endDate: string) {
+  Catches(
+    where: {Fisherman: {_eq:$fisherman}, 
+      Species: {_eq:$species}, 
+      BodyOfWater: {_eq:$water}, 
+      CatchDate: {_gte: $startDate, _lte: $endDate}})
+  {
+    BodyOfWater
+    CatchDate
+    CatchTime
+    _id
+    AirTemp
+    Fisherman
+    Loc
+    Picture
+    Pressure
+    TideDirection
+    LowTideOffset
+    HighTideOffset
+    Species
+    WaterTemp
+    WindDirection
+    WindSpeed
+  }
+}
+
+query CatchesInfo($fisherman: [string!], $species: [string!], $catchDate:string) {
+  Catches(
+    where: { Fisherman:{_in:$fisherman}, Species:{_in: $species}, CatchDate:{_eq:$catchDate } }
+  ) {
+    BodyOfWater
+    CatchDate
+    CatchTime
+    _id
+    AirTemp
+    Fisherman
+    Loc
+    Picture
+    Pressure
+    TideDirection
+    Species
+    WaterTemp
+    WindDirection
+    WindSpeed
+  }
+}

@@ -11,6 +11,8 @@ import { isDevMode } from '@angular/core';
 import { environment } from './environments/environment';
 import { provideServiceWorker } from '@angular/service-worker';
 import { IonicModule } from '@ionic/angular';
+import { provideHttpClient} from '@angular/common/http';
+import { graphqlProvider } from './app/graphql.provider';
 // Add the import
 import { defineCustomElements } from '@ionic/pwa-elements/loader';
 
@@ -24,6 +26,7 @@ defineCustomElements(window);
 
 bootstrapApplication(AppComponent, {
   providers: [
+
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     importProvidersFrom(IonicModule.forRoot({innerHTMLTemplatesEnabled: true})),
     provideIonicAngular(),
@@ -31,7 +34,8 @@ bootstrapApplication(AppComponent, {
       enabled: !isDevMode(),
       registrationStrategy: 'registerWhenStable:30000'
     }),
-
+    provideHttpClient(),
+   graphqlProvider,
 ],
 });
 
