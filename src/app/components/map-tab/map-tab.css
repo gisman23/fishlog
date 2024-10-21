@@ -16,3 +16,12 @@ body {
   margin: 0;
   padding: 0;
 }
+
+#infoText{
+  background-color: red;
+}
+.infoText{
+  background-color: red;
+}
+
+

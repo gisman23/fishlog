@@ -31,7 +31,8 @@ export class MapTab
   }
 
   ionViewDidEnter() {
-   this.createMap();
+ //  this.createMap();
+ this.initMap();
   }
   
   async createMap()  {
@@ -42,7 +43,9 @@ export class MapTab
       zoom: 12,
       mapId: "DEMO_MAP_ID",
     });
-   } 
+
+  }; 
+   
 
   public async DisplayCatches(catches) {
     const { InfoWindow } = await google.maps.importLibrary("maps") as google.maps.MapsLibrary;
@@ -50,17 +53,12 @@ export class MapTab
  
 
     this.markers = []
-    const infowindow = new InfoWindow({
-      content: "Testing",
-    });
 
  //   this.featureGroup.clearLayers();
     catches.forEach((x) => {
       this.dateStr = String(x.CatchDate).substring(5,7) + '/' + String(x.CatchDate).substring(8,10) + '/' + String(x.CatchDate).substring(0,4)
-      console.log(x.Loc[1], x.Loc[0])
-      const popupContent = document.createElement("div");
-       popupContent.innerHTML =
-        '<div>' +
+      const popupContent = 
+        '<div id="infoText">' +
         '<b>' + String(this.dateStr) + '</b> - ' + String(x.CatchTime) + 
         '<br/> ' +
         '<b> Fishermen:  </b> ' +
@@ -84,7 +82,8 @@ export class MapTab
     //  popupContent +=
      //   '<br>' + '<img src=' + x.Picture + ' width="128" height="128"></div>';
 */
-
+  const infoWindow = new InfoWindow({
+  content: popupContent })
       const map = this.map
       const position = new google.maps.LatLng(x.Loc[1], x.Loc[0])
       const marker = new AdvancedMarkerElement({
@@ -92,9 +91,11 @@ export class MapTab
           position, 
        });
 
+
+
        marker.addListener("click", () => {
-        infowindow.setContent("Hello")
-        infowindow.open(
+  //      infoWindow.setContent("Hello how big is this box of text")
+        infoWindow.open(
           {map,
           anchor: marker,
           }
@@ -110,5 +111,52 @@ export class MapTab
     var mkl = this.markers
     new MarkerClusterer({map, markers:mkl})
   
-  }
+}
+
+ async initMap() {
+  const uluru = { lat: -25.363, lng: 131.044 };
+  const { Map} = await google.maps.importLibrary("maps") as google.maps.MapsLibrary;
+
+  const map = new Map(document.getElementById("map"), {
+    zoom: 4,
+    center: uluru,
+  });
+  const contentString =
+    '<div id="content">' +
+    '<div id="siteNotice">' +
+    "</div>" +
+    '<h1 id="firstHeading" class="firstHeading">Uluru</h1>' +
+    '<div id="bodyContent">' +
+    "<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large " +
+    "sandstone rock formation in the southern part of the " +
+    "Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) " +
+    "south west of the nearest large town, Alice Springs; 450&#160;km " +
+    "(280&#160;mi) by road. Kata Tjuta and Uluru are the two major " +
+    "features of the Uluru - Kata Tjuta National Park. Uluru is " +
+    "sacred to the Pitjantjatjara and Yankunytjatjara, the " +
+    "Aboriginal people of the area. It has many springs, waterholes, " +
+    "rock caves and ancient paintings. Uluru is listed as a World " +
+    "Heritage Site.</p>" +
+    '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">' +
+    "https://en.wikipedia.org/w/index.php?title=Uluru</a> " +
+    "(last visited June 22, 2009).</p>" +
+    "</div>" +
+    "</div>";
+  const infowindow = new google.maps.InfoWindow({
+    content: contentString,
+    ariaLabel: "Uluru",
+  });
+  const marker = new google.maps.Marker({
+    position: uluru,
+    map,
+    title: "Uluru (Ayers Rock)",
+  });
+
+  marker.addListener("click", () => {
+    infowindow.open({
+      anchor: marker,
+      map,
+    });
+  });
+}
 }
