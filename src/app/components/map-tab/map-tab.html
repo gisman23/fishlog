@@ -1,11 +1,71 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>
-      Fishing Catches
-    </ion-title>
+    <ion-buttons slot="secondary">
+      <ion-button id="open-modal">
+        <ion-icon slot="icon-only" name="options"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Fishing Catches</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div id="map"></div>
+  <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="cancel()">Cancel</ion-button>
+          </ion-buttons>
+
+          <ion-buttons slot="end">
+            <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+
+        <ion-item
+          id="itemautocomplete"
+          detail="false"
+          fill="outline"
+          shape="round"
+          style="padding-left: 0px; padding-right: 0px"
+        >
+          <input
+            id="txtautocomplete"
+            class="native-input sc-ion-input-md"
+            list="txtautocompletelist"
+          />
+          <ion-button
+            id="button1"
+            fill="clear"
+            mode="ios"
+            slot="end"
+            style="
+              --padding-start: 0px;
+              --padding-bottom: 0px;
+              --padding-end: 0px;
+              --padding-top: 0px;
+            "
+          >
+
+            <ion-icon
+              id="button1_icon"
+              slot="icon-only"
+              name="send-outline"
+            ></ion-icon>
+            <datalist id="txtautocompletelist">
+              <option>Steve</option>
+              <option>Keith</option>
+              <option>Bunkie</option>
+              <option>Don H</option>
+            </datalist>
+          </ion-button>
+
+        </ion-item>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>

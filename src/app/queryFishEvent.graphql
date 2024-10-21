@@ -4,9 +4,18 @@ query FishingEvents {
     CatchDate
     CatchTime
     _id
+    AirTemp
     Fisherman
     Loc
+    Picture
+    Pressure
+    TideDirection
+    LowTideOffset
+    HighTideOffset
     Species
+    WaterTemp
+    WindDirection
+    WindSpeed
   }
 }
 

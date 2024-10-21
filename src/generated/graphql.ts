@@ -298,7 +298,7 @@ export type Subscription_RootCatches_By_PkArgs = {
 export type FishingEventsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type FishingEventsQuery = { __typename?: 'query_root', Catches: Array<{ __typename?: 'Catches', BodyOfWater: any, CatchDate: any, CatchTime: any, _id: any, Fisherman: any, Loc: Array<any>, Species: any }> };
+export type FishingEventsQuery = { __typename?: 'query_root', Catches: Array<{ __typename?: 'Catches', BodyOfWater: any, CatchDate: any, CatchTime: any, _id: any, AirTemp: any, Fisherman: any, Loc: Array<any>, Picture: any, Pressure: any, TideDirection: any, LowTideOffset: any, HighTideOffset: any, Species: any, WaterTemp: any, WindDirection: any, WindSpeed: any }> };
 
 export type FishingEventsByFilterQueryVariables = Exact<{
   fisherman?: InputMaybe<Scalars['string']['input']>;
@@ -327,9 +327,18 @@ export const FishingEventsDocument = gql`
     CatchDate
     CatchTime
     _id
+    AirTemp
     Fisherman
     Loc
+    Picture
+    Pressure
+    TideDirection
+    LowTideOffset
+    HighTideOffset
     Species
+    WaterTemp
+    WindDirection
+    WindSpeed
   }
 }
     `;
