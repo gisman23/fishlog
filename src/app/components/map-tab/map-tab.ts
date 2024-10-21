@@ -31,8 +31,8 @@ export class MapTab
   }
 
   ionViewDidEnter() {
- //  this.createMap();
- this.initMap();
+   this.createMap();
+ 
   }
   
   async createMap()  {
@@ -153,6 +153,7 @@ export class MapTab
   });
 
   marker.addListener("click", () => {
+    infowindow.focus()
     infowindow.open({
       anchor: marker,
       map,
