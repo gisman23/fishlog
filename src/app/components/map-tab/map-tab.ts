@@ -5,7 +5,8 @@ import {
   IonTitle,
   IonContent,
   IonButton, 
-  IonModal
+  IonModal,
+  IonLabel
 } from '@ionic/angular/standalone';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { DataSignalService } from '../../services/data.service';
@@ -18,7 +19,8 @@ import { OverlayEventDetail } from '@ionic/core/components';
   templateUrl: 'map-tab.html',
   styleUrls: ['map-tab.css'],
   standalone: true,
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonModal, GoogleMapsModule],
+  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonButton,
+     IonLabel, IonModal, GoogleMapsModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class MapTab {
