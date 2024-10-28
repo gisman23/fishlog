@@ -24,43 +24,89 @@
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
-      <ion-content class="ion-padding">
-        <ion-label>Fisherman</ion-label>
-        <ion-item
-          id="itemautocomplete"
-          detail="false"
-          fill="outline"
-          shape="round"
-          style="padding-left: 0px; padding-right: 0px"
-        >
-          <input id="txtautocomplete" class="native-input sc-ion-input-md" list="txtautocompletelist"/>
-          <datalist id="txtautocompletelist">
-              <option>Steven</option>
-              <option>Keith</option>
-              <option>Bunkie</option>
-              <option>Don H</option>
-          </datalist>
-        </ion-item>
 
-        <ion-label>Species</ion-label>
-        <ion-item
-          id="species"
-          detail="false"
-          fill="outline"
-          shape="round"
-          style="padding-left: 0px; padding-right: 0px"
-        >
-          <input id="speciesautocomplete" class="native-input sc-ion-input-md" list="specieslist"/>
-          <datalist id="specieslist">
-              <option>Pickerel</option>
-              <option>Bass</option>
-              <option>Trout</option>
-              <option>Salmon</option>
-          </datalist>
-        </ion-item>
-        <ion-datetime presentation="date"></ion-datetime>
+      <ion-content  scroll-y="false">
+        <ion-picker>
+          <ion-picker-column>
+            <ion-picker-column-option value="" disabled="true"
+              >--</ion-picker-column-option
+            >
+            <ion-picker-column-option value="Steve"
+              >Steve</ion-picker-column-option
+            >
+            <ion-picker-column-option value="Keith"
+              >Keith</ion-picker-column-option
+            >
+            <ion-picker-column-option value="Bunkie"
+              >Bunkie</ion-picker-column-option
+            >
+            <ion-picker-column-option value="Don H"
+              >Don H</ion-picker-column-option
+            >
+          </ion-picker-column>
+          <ion-picker-column>
+            <ion-picker-column-option value="" disabled="true"
+              >--</ion-picker-column-option
+            >
+            <ion-picker-column-option value="Pickerel"
+              >Pickerel</ion-picker-column-option
+            >
+            <ion-picker-column-option value="LM Bass"
+              >Largemouth Bass</ion-picker-column-option
+            >
+            <ion-picker-column-option value="Blue Catfish"
+              >Blue Catcfish</ion-picker-column-option
+            >
+            <ion-picker-column-option value="Channel Catfish"
+              >Channel Catfish</ion-picker-column-option
+            >
+            <ion-picker-column-option value="Chinook Salmon"
+              >Chinook Salmon</ion-picker-column-option
+            >
+          </ion-picker-column>
+          <ion-picker-column>
+            <ion-picker-column-option value="" disabled="true"
+              >--</ion-picker-column-option
+            >
+            <ion-picker-column-option value="Magothy"
+              >Magothy River</ion-picker-column-option
+            >
+            <ion-picker-column-option value="Potomac"
+              >Potomac River</ion-picker-column-option
+            >
+            <ion-picker-column-option value="Choptank"
+              >Choptank</ion-picker-column-option
+            >
+            <ion-picker-column-option value="Columbia"
+              >Columbia River</ion-picker-column-option
+            >
+            <ion-picker-column-option value="Salmon"
+              >Salmon</ion-picker-column-option
+            >
+          </ion-picker-column>
+        </ion-picker>
+
+        <ion-grid>
+          <ion-row>
+            <ion-label>Start Date: </ion-label>
+            <ion-datetime-button datetime="datetime"></ion-datetime-button>
+
+            <ion-modal [keepContentsMounted]="true">
+              <ng-template>
+                <ion-datetime presentation="date" id="datetime"></ion-datetime>
+              </ng-template>
+            </ion-modal>
+            <ion-label>End Date: </ion-label>
+            <ion-datetime-button datetime="datetime"></ion-datetime-button>
+
+            <ion-modal [keepContentsMounted]="true">
+              <ng-template>
+                <ion-datetime presentation="date" id="datetime"></ion-datetime>
+              </ng-template>
+            </ion-modal>
+          </ion-row>
+        </ion-grid>
       </ion-content>
     </ng-template>
   </ion-modal>
 </ion-content>
-

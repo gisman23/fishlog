@@ -6,8 +6,6 @@
 #map {
   height: 100%;
 }
-
-
-ion-datetime {
-  height:250px
-}
+#filter {
+  background-color: aqua;
+ }
