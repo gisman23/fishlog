@@ -9,28 +9,28 @@ export const routes: Routes = [
       {
         path: 'camera',
         loadComponent: () =>
-          import('../../components/camera-tab/camera-tab').then((m) => m.CameraTab),
+          import('../../components/camera-tab/camera-tab').then((m) => m.CameraTabComponent),
       },
       {
         path: 'tab2',
         loadComponent: () =>
-          import('../tab2/tab2.page').then((m) => m.Tab2Page),
+          import('../logs-tab/logs-tab').then((m) => m.LogsTabComponent),
       },
       {
         path: 'map',
         loadComponent: () =>
-          import('../../components/map-tab/map-tab').then((m) => m.MapTab),
+          import('../../components/map-tab/map-tab').then((m) => m.MapTabComponent),
       },
       {
         path: '',
-        redirectTo: '/tabs/camera',
+        redirectTo: '/tabs/map',
         pathMatch: 'full',
       },
     ],
   },
   {
     path: '',
-    redirectTo: '/tabs/camera',
+    redirectTo: '/tabs/map',
     pathMatch: 'full',
   },
 ];

@@ -23,7 +23,7 @@ import { OverlayEventDetail } from '@ionic/core/components';
      IonLabel, IonModal, GoogleMapsModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class MapTab {
+export class MapTabComponent {
   @ViewChild(IonModal) modal: IonModal;
   name:string;
   message = "testing modal"

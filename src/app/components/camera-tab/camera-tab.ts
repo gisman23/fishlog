@@ -28,7 +28,7 @@ import { StoreImageService } from '../../services/StoreImage.service';
     IonContent,
   ],
 })
-export class CameraTab {
+export class CameraTabComponent {
   @ViewChild('video', { static: true }) video: ElementRef<HTMLVideoElement>;
   @ViewChild('canvasElement') canvasElement: ElementRef;
 

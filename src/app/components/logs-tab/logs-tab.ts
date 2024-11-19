@@ -7,13 +7,13 @@ import * as ExifReader from 'exifreader'
 import { decode } from "base64-arraybuffer";
 
 @Component({
-  selector: 'app-tab2',
-  templateUrl: 'tab2.page.html',
-  styleUrls: ['tab2.page.scss'],
+  selector: 'app-logs-tab',
+  templateUrl: 'logs-tab.html',
+  styleUrls: ['logs-tab.css'],
   standalone: true,
   imports: [IonFab,  CommonModule, IonHeader, IonToolbar, IonTitle, IonContent]
 })
-export class Tab2Page {
+export class LogsTabComponent {
 
 
   
