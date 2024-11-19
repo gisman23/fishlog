@@ -1,5 +1,5 @@
 {
-  "name": "fishlog",
+  "name": "fishapp",
   "integrations": {
     "capacitor": {}
   },
