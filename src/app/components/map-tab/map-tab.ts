@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, effect } from '@angular/core';
+import { Component, ViewChild, ElementRef, effect, OnInit } from '@angular/core';
 import {
   IonHeader,
   IonToolbar,
@@ -23,7 +23,7 @@ import { OverlayEventDetail } from '@ionic/core/components';
      IonLabel, IonModal, GoogleMapsModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class MapTabComponent {
+export class MapTabComponent implements OnInit{
   @ViewChild(IonModal) modal: IonModal;
   name:string;
   message = "testing modal"
@@ -31,16 +31,26 @@ export class MapTabComponent {
   map: any;
   marker: google.maps.marker.AdvancedMarkerElement;
   markers: google.maps.marker.AdvancedMarkerElement[] = [];
+  dataservice: any;
 
   constructor(private dataService: DataSignalService) {
-    effect(() => {
+    this.dataservice = dataService;
+ /*   effect(() => {
       this.DisplayCatches(dataService.selectedCatches());
     });
     effect(() => {
       this.DisplayCatches(dataService.catches());
-    });
+    });*/
   }
 
+  ngOnInit(): void {
+    effect(() => {
+      this.DisplayCatches(this.dataService.selectedCatches());
+    });
+    effect(() => {
+      this.DisplayCatches(this.dataService.catches());
+    });
+  }
   ionViewDidEnter() {
     this.createMap();
   }
