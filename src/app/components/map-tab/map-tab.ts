@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, effect, OnInit } from '@angular/core';
+import { Component, ViewChild, effect } from '@angular/core';
 import {
   IonHeader,
   IonToolbar,
@@ -9,10 +9,13 @@ import {
   IonLabel
 } from '@ionic/angular/standalone';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { DataSignalService } from '../../services/data.service';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { MarkerClusterer } from '@googlemaps/markerclusterer';
 import { OverlayEventDetail } from '@ionic/core/components';
+import { ChangeDetectionStrategy } from '@angular/core';
+import { DataSignalService } from '../../services/data.service';
+
+
 
 @Component({
   selector: 'app-map-tab',
@@ -22,8 +25,9 @@ import { OverlayEventDetail } from '@ionic/core/components';
   imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonButton,
      IonLabel, IonModal, GoogleMapsModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MapTabComponent implements OnInit{
+export class MapTabComponent {
   @ViewChild(IonModal) modal: IonModal;
   name:string;
   message = "testing modal"
@@ -34,25 +38,19 @@ export class MapTabComponent implements OnInit{
   dataservice: any;
 
   constructor(private dataService: DataSignalService) {
-    this.dataservice = dataService;
- /*   effect(() => {
+
+   effect(() => {
       this.DisplayCatches(dataService.selectedCatches());
     });
     effect(() => {
       this.DisplayCatches(dataService.catches());
-    });*/
+    });
   }
 
-  ngOnInit(): void {
-    effect(() => {
-      this.DisplayCatches(this.dataService.selectedCatches());
-    });
-    effect(() => {
-      this.DisplayCatches(this.dataService.catches());
-    });
-  }
   ionViewDidEnter() {
     this.createMap();
+    this.DisplayCatches(this.dataService.catches());
+
   }
 
   async createMap() {
@@ -86,7 +84,7 @@ export class MapTabComponent implements OnInit{
         '/' +
         String(x.CatchDate).substring(0, 4);
       var popupContent =
-        '<div id="infoText">' +
+        '<div style="color:blue;  id="infoText">' +
         '<b>' +
         String(this.dateStr) +
         '</b> - ' +
@@ -114,7 +112,7 @@ export class MapTabComponent implements OnInit{
           '<br>' + '<img src=' + x.Picture + ' width="128" height="128"></div>';
 
       const infoWindow = new InfoWindow({
-        content: popupContent,
+        content:  popupContent,
       });
       const map = this.map;
       const position = new google.maps.LatLng(x.Loc[1], x.Loc[0]);
