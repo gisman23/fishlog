@@ -9,7 +9,11 @@
 #filter {
   background-color: aqua;
  }
+ ion-picker-column-option {
+  font-size: medium;
+  color: red;
+}
 
- .infoText {
-  background-color: blue;
- }
+.fishignore {
+  font-size: x-small;
+}
