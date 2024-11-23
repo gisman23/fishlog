@@ -26,20 +26,20 @@
       </ion-header>
 
       <ion-content scroll-y="false">
-        <ion-grid>  
-          <ion-row>  
+        <ion-grid>
+          <ion-row>
             <ion-picker>
               <ion-picker-column>
-                <div slot="prefix">Fishermen:</div>
                 <ion-picker-column-option value="" disabled="true">--</ion-picker-column-option>
+                <ion-picker-column-option value="Fishermen">Fishermen</ion-picker-column-option>
                 <ion-picker-column-option value="Steve">Steve</ion-picker-column-option>
                 <ion-picker-column-option value="Keith">Keith</ion-picker-column-option>
                 <ion-picker-column-option value="Bunkie">Bunkie</ion-picker-column-option>
                 <ion-picker-column-option value="Don H">Don H</ion-picker-column-option>
               </ion-picker-column>
               <ion-picker-column>
-                <div slot="prefix">Species:</div>
                 <ion-picker-column-option value="" disabled="true">--</ion-picker-column-option>
+                <ion-picker-column-option value="Species">Species</ion-picker-column-option>
                 <ion-picker-column-option value="Pickerel">Pickerel</ion-picker-column-option>
                 <ion-picker-column-option value="LM Bass">Largemouth Bass</ion-picker-column-option>
                 <ion-picker-column-option value="Blue Catfish">Blue Catcfish</ion-picker-column-option>
@@ -47,35 +47,36 @@
                 <ion-picker-column-option value="Chinook Salmon">Chinook Salmon</ion-picker-column-option>
               </ion-picker-column>
             </ion-picker>
-          </ion-row>  
-          <ion-row>  
-          <ion-picker>
-            <ion-picker-column>
-              <div slot="prefix">River:</div>
-              <ion-picker-column-option value="" disabled="true">--</ion-picker-column-option>
-              <ion-picker-column-option value="Magothy">Magothy River</ion-picker-column-option>
-              <ion-picker-column-option value="Potomac">Potomac River</ion-picker-column-option>
-              <ion-picker-column-option value="Choptank">Choptank</ion-picker-column-option>
-              <ion-picker-column-option value="Columbia">Columbia River</ion-picker-column-option>
-              <ion-picker-column-option value="Salmon">Salmon</ion-picker-column-option>
-            </ion-picker-column>
-          </ion-picker>
-          </ion-row>  
-  
+          </ion-row>
+          <ion-row>
+            <ion-picker>
+              <ion-picker-column>
+                <div slot="prefix">River:</div>
+                <ion-picker-column-option value="" disabled="true">--</ion-picker-column-option>
+                <ion-picker-column-option value="Body of Water">Body of Water</ion-picker-column-option>
+                <ion-picker-column-option value="Magothy">Magothy River</ion-picker-column-option>
+                <ion-picker-column-option value="Potomac">Potomac River</ion-picker-column-option>
+                <ion-picker-column-option value="Choptank">Choptank</ion-picker-column-option>
+                <ion-picker-column-option value="Columbia">Columbia River</ion-picker-column-option>
+                <ion-picker-column-option value="Magothy">Magothy</ion-picker-column-option>
+              </ion-picker-column>
+            </ion-picker>
+          </ion-row>
+
 
 
           <ion-row>
             <ion-label>Start Date: </ion-label>
             <ion-datetime-button datetime="datetime"></ion-datetime-button>
-
             <ion-modal [keepContentsMounted]="true">
               <ng-template>
                 <ion-datetime presentation="date" id="datetime"></ion-datetime>
               </ng-template>
             </ion-modal>
+          </ion-row>
+          <ion-row>
             <ion-label>End Date: </ion-label>
             <ion-datetime-button datetime="datetime"></ion-datetime-button>
-
             <ion-modal [keepContentsMounted]="true">
               <ng-template>
                 <ion-datetime presentation="date" id="datetime"></ion-datetime>
